@@ -5,9 +5,13 @@ import time
 #https://www.youtube.com/watch?v=AUlefK47L0s&t=298s
 
 location = [0, 0]
+atCorners = [10, 0], [10, 10], [0, 10], [0, 10]
 
-pn532 = Pn532_i2c()
-pn532.SMconfigure()
+
+def setRFID():
+    pn532 = Pn532_i2c()
+    pn532.SAMconfigure()
+
 
 card = Mifare()
 
@@ -36,11 +40,11 @@ while True:  #--------------------infinite loop for localization----------------
 # if (get encoder tick):
 #     if orientation_state ==1:
 #         location = [location[0]+0.2, location[1],]
-#     if orientation_state ==2:
+#     elif orientation_state ==2:
 #         location = [location[0], location[1]+0.2,]
-#     if orientation_state ==3:
+#     elif orientation_state ==3:
 #         location = [location[0]-0.2, location[1],]
-#     if orientation_state ==4:
+#     elif orientation_state ==4:
 #         location = [location[0], location[1]-0.2,]
 #print(location)
 #below is an example using another library------------------------------------

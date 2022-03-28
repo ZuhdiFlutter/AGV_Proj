@@ -23,11 +23,6 @@ GPIO.setup(ECHO1, GPIO.IN)  # initialize GPIO Pin as input
 
 GPIO.setup(led, GPIO.OUT)
 
-GPIO.setup(m11, GPIO.OUT)
-GPIO.setup(m12, GPIO.OUT)
-GPIO.setup(m21, GPIO.OUT)
-GPIO.setup(m22, GPIO.OUT)
-
 GPIO.output(led, 1)
 
 time.sleep(5)

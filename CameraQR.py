@@ -4,14 +4,16 @@
 import cv2  #import opencv
 import numpy as np
 
-#cap = cv2.VideoCapture(0)  #open camera using default backend
-#detector = cv2.QRCodeDetector()  #for QR
+cap = cv2.VideoCapture(0)  #open camera using default backend
+detector = cv2.QRCodeDetector()  #for QR
 
 #---------------test using png file--------------------
 # img = cv2.imread(r'C:\Users\Zuhdi\Downloads\testQR.png')
 
 
-def checkCamera(cap, detector):
+def checkCamera():
+    global cap
+    global detector
     while True:  #infinite loop to check at all times
         _, img = cap.read()  #get image of QR
 
@@ -34,7 +36,7 @@ def checkCamera(cap, detector):
 
             if data:  #data can be read
                 print('data found: ', data)
-                return 1
+                # return 1
                 #exec()
             #if data == 'Station1':
             #insert code to go to Station1
@@ -43,7 +45,7 @@ def checkCamera(cap, detector):
             #insert code to park at station1
             else:
                 print('QR data not found!')
-                return 0
+                # return 0
         cv2.waitKey(50)
 
         cv2.imshow("code detector", img)  #display live feedback camera
@@ -51,17 +53,9 @@ def checkCamera(cap, detector):
         if (cv2.waitKey(1) == ord("q")):
             break
 
-    # cv2.wait(10)
-    # cv2.VideoCapture(0).release()
-    # cv2.destroyAllWindows()
+    cv2.wait(10)
+    cv2.VideoCapture(0).release()
+    cv2.destroyAllWindows()
 
 
-# checkCamera(cv2.VideoCapture(0), cv2.QRCodeDetector())
-
-try:
-    while True:
-        checkCamera(cv2.VideoCapture(0), cv2.QRCodeDetector())
-except:
-    print('error brader')
-finally:
-    print('done')
+# checkCamera()

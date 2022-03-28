@@ -1,31 +1,39 @@
-from threading import Thread
 import multiprocessing
 from CameraQR import *
-
+# from pynput.keyboard
+import keyboard
 import time
 
+currentTime = 0
 
-def measureTime(masa):
+
+def measureTime():
+    global currentTime
     while True:
         time.sleep(1)
-        masa = masa + 1
-        print(masa)
+        currentTime = currentTime + 1
+        print(currentTime)
+        if currentTime == 10:
+            print('counting done')
+            break
 
 
-currentTime = 0
-countT = Thread(target=measureTime, args=(currentTime))  #currentTime)
-check1 = Thread(target=checkCamera,
-                args=(
-                    cv2.VideoCapture(0, cv2.CAP_DSHOW),
-                    cv2.QRCodeDetector(),
-                ))
-
-try:
+def inputP():
     while True:
-        countT.start()
-        check1.start()
-        # check1.join()
-        # countT.join()
+        if keyboard.read_key() == "p":
+            print("You pressed p")
 
-except:
-    print("Error: unable to start process")
+
+countT = multiprocessing.Process(target=measureTime)  #currentTime)
+check1 = multiprocessing.Process(target=checkCamera)
+check2 = multiprocessing.Process(target=inputP)
+
+if __name__ == '__main__':
+    # freeze_support()
+    countT.start()
+    check1.start()
+    check2.start()
+
+    countT.join()
+    check1.join()
+    check2.join()

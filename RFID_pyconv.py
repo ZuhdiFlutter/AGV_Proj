@@ -2,38 +2,27 @@ from py532lib.i2c import *
 from py532lib.frame import *
 from py532lib.constants import *
 import time
-#https://www.youtube.com/watch?v=AUlefK47L0s&t=298s
 
 location = [0, 0]
 atCorners = [10, 0], [10, 10], [0, 10], [0, 10]
 
+uidToCoord = {
+    "bytearray(b'K\\x01\\x01\\x00\\x04\\x08\\x04,\\x07\\xee\\x02')": [0, 0],
+    "bytearray(b'K\\x01\\x01\\x00\\x02\\x18\\x04\\x0f\\xde\\x81\\xf7')":
+    [1, 0],
+    "bytearray(b'K\\x01\\x01\\x00\\x04\\x88\\x04%\\x0f\\x90\\xc2')": [2, 0],
+    "bytearray(b'K\\x01\\x01\\x00\\x02\\x18\\x04ol\\x06\\xf7')": [3, 0],
+}
 
-def setRFID():
-    pn532 = Pn532_i2c()
-    pn532.SAMconfigure()
+pn532 = Pn532_i2c()
+pn532.SAMconfigure()
 
-
-card = Mifare()
-
-while True:  #--------------------infinite loop for localization----------------------
-    card_data = pn532.read_mifare().get_data()
-
-    uid = card.scan_field()
-
-    print(card_data)
+while True:
+    uid = str(pn532.read_mifare().get_data())
     print(uid)
-
-    uidtoCoord = {
-        "uid1": [0, 0],
-        "uid2": [1, 0],
-        "uid3": [2, 0],
-        "uid4": [3, 0],
-        "uid5": [4, 0],
-    }
-
-    location = uidtoCoord[uid]
-
+    location = uidToCoord[uid]
     print(location)
+    time.sleep(1)
 
 #---------------below is the code snippets for encoder-------------------
 #time.sleep(.1)

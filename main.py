@@ -3,14 +3,12 @@ from HCSR04_code import *
 from HCSR04_test import *
 from RFID_pyconv import *
 from CameraQR import *
+import multiprocessing
+from localization import *
 # import RPi.GPIO as GPIO
 import time
 
 # GPIO.setmode(GPIO.BOARD)  # programming the GPIO by BCM pin numbers
-
-cap = cv2.VideoCapture(0)  #open camera using default backend
-detector = cv2.QRCodeDetector()  #for QR
-location = [0, 0]  #initialise location as 0x, 0y
 
 
 def startCheck():
@@ -40,6 +38,3 @@ def startCheck():
         print('battery insufficient')
         print('stop & buzzer'
               )  #--------Clement&Troy: Send to UNO---------------------
-
-
-startCheck()

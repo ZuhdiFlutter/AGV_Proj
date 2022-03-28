@@ -17,12 +17,16 @@ uidToCoord = {
 pn532 = Pn532_i2c()
 pn532.SAMconfigure()
 
-while True:
-    uid = str(pn532.read_mifare().get_data())
-    print(uid)
-    location = uidToCoord[uid]
-    print(location)
-    time.sleep(1)
+
+def readRFIDloc():
+    global location
+    while True:
+        uid = str(pn532.read_mifare().get_data())
+        print(uid)
+        location = uidToCoord[uid]
+        print(location)
+        time.sleep(0.2)
+
 
 #---------------below is the code snippets for encoder-------------------
 #time.sleep(.1)

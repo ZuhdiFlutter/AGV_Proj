@@ -38,3 +38,9 @@ def startCheck():
         print('battery insufficient')
         print('stop & buzzer'
               )  #--------Clement&Troy: Send to UNO---------------------
+
+
+if __name__ == '__main__':
+    readRFID.start()
+
+    readRFID.join()

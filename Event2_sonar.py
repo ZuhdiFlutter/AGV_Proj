@@ -14,12 +14,12 @@ GPIO.setup(GPIO_TRIGGER, GPIO.OUT)
 GPIO.setup(GPIO_ECHO, GPIO.IN)
 
 
-def checkDistance():
+def distance():
     # set Trigger to HIGH
     GPIO.output(GPIO_TRIGGER, True)
 
     # set Trigger after 0.01ms to LOW
-    time.sleep(0.00001)
+    time.sleep(0.1)
     GPIO.output(GPIO_TRIGGER, False)
 
     StartTime = time.time()
@@ -42,14 +42,10 @@ def checkDistance():
     return distance
 
 
-if __name__ == '__main__':
-    try:
-        while True:
-            dist = distance()
-            print("Measured Distance = %.1f cm" % dist)
-            time.sleep(0.5)
-
-        # Reset by pressing CTRL + C
-    except KeyboardInterrupt:
-        print("Measurement stopped by User")
-        GPIO.cleanup()
+def ObstacleCase():
+    while True:
+        dist = distance()
+        print("Measured Distance = %.1f cm" % dist)
+        time.sleep(0.5)
+        if dist < 5:
+            print("OBSTACLE AHEAD!")

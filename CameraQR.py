@@ -58,4 +58,4 @@ def checkCamera():
     cv2.destroyAllWindows()
 
 
-# checkCamera()
+checkCamera()

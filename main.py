@@ -1,14 +1,13 @@
 from Event1_Battery import *
-from HCSR04_code import *
-from HCSR04_test import *
+from Event2_sonar import *
 from RFID_pyconv import *
 from CameraQR import *
 import multiprocessing
 from localization import *
-# import RPi.GPIO as GPIO
+import RPi.GPIO as GPIO
 import time
 
-# GPIO.setmode(GPIO.BOARD)  # programming the GPIO by BCM pin numbers
+GPIO.setmode(GPIO.BOARD)  # programming the GPIO by BCM pin numbers
 
 
 def startCheck():

@@ -1,11 +1,6 @@
-from Event1_Battery import *
-from Event2_sonar import *
-from RFID_pyconv import *
-from CameraQR import *
-import multiprocessing
+from events import *
 from localization import *
-import RPi.GPIO as GPIO
-import time
+import multiprocessing
 
 GPIO.setmode(GPIO.BOARD)  # programming the GPIO by BCM pin numbers
 

@@ -1,6 +1,7 @@
 #Libraries
 import RPi.GPIO as GPIO
 import time
+from Tasks import *
 
 #GPIO Mode (BOARD / BCM)
 GPIO.setmode(GPIO.BCM)
@@ -49,3 +50,4 @@ def ObstacleCase():
         time.sleep(0.5)
         if dist < 5:
             print("OBSTACLE AHEAD!")
+            Avoid_Obstacle()

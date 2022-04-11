@@ -1,6 +1,6 @@
 from events import *
 from localization import *
-import multiprocessing
+from multiprocessing import *
 
 GPIO.setmode(GPIO.BOARD)  # programming the GPIO by BCM pin numbers
 
@@ -36,5 +36,11 @@ def startCheck():
 
 if __name__ == '__main__':
     readRFID.start()
+    readBatt.start()
+    readObst.start()
+    readQR.start()
 
     readRFID.join()
+    readBatt.join()
+    readObst.join()
+    readQR.join()

@@ -1,30 +1,30 @@
-from py532lib.i2c import *
+from py532lib.i2c import *  #------import libraries
 from py532lib.frame import *
 from py532lib.constants import *
 import time
 
-location = [0, 0]
-atCorners = [10, 0], [10, 10], [0, 10], [0, 10]
+location = [0, 0]  #initial location before RFID detected
+atCorners = [10, 0], [10, 10], [0, 10], [0, 10]  #corner RFID defined
 
-uidToCoord = {
+uidToCoord = {  #------------each UID is linked to a coordinate------
     "bytearray(b'K\\x01\\x01\\x00\\x04\\x08\\x04,\\x07\\xee\\x02')": [0, 0],
-    "bytearray(b'K\\x01\\x01\\x00\\x02\\x18\\x04\\x0f\\xde\\x81\\xf7')":
-    [1, 0],
+    "bytearray(b'K\\x01\\x01\\x00\\x02\\x18\\x04\\x0f\\xde\\x81\\xf7')": [1, 0],
     "bytearray(b'K\\x01\\x01\\x00\\x04\\x88\\x04%\\x0f\\x90\\xc2')": [2, 0],
     "bytearray(b'K\\x01\\x01\\x00\\x02\\x18\\x04ol\\x06\\xf7')": [3, 0],
 }
 
-pn532 = Pn532_i2c()
-pn532.SAMconfigure()
+pn532 = Pn532_i2c()  #define communication interface
+pn532.SAMconfigure()  #start listening
 
 
-def readRFIDloc():
-    global location
+def readRFIDloc():  #------function to read RFID tags
+    global location  #------accesss to amend the location variable
     while True:
-        uid = str(pn532.read_mifare().get_data())
+        uid = str(
+            pn532.read_mifare().get_data())  #changing UID bytes to string
         print(uid)
-        location = uidToCoord[uid]
-        print(location)
+        location = uidToCoord[uid]  #update the location
+        print(location)  #execute task
         time.sleep(0.2)
 
 

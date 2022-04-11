@@ -1,8 +1,9 @@
 import multiprocessing
-from RFID_pyconv import *
+from RFID import *
+from events import *
 
 orientation = 1  #---------1-4.-----each turn will increase 1. This is to add to location using encoders
-readRFID = multiprocessing.Process(target=readRFIDloc)
+readRFID = multiprocessing.Process(target=RFIDloc)
 
 #---------------below is the code snippets example for encoder-------------------
 #time.sleep(.1)
